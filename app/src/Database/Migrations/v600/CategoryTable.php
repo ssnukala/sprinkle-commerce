@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2013-2016 Srinivas Nukala
  */
 
-namespace UserFrosting\Sprinkle\Commerce\Database\Migrations\v401;
+namespace UserFrosting\Sprinkle\Commerce\Database\Migrations\v600;
 
 use UserFrosting\Sprinkle\Core\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,7 +21,8 @@ use Illuminate\Database\Schema\Builder;
  * @extends Migration
  * @author Srinivas Nukala
  */
-class CatalogTable extends Migration
+
+class CategoryTable extends Migration
 {
     public static $dependencies = [
         '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\PermissionsTable'
@@ -32,13 +33,11 @@ class CatalogTable extends Migration
      */
     public function up()
     {
-        if (!$this->schema->hasTable('pr_catalog')) {
-            $this->schema->create('pr_catalog', function (Blueprint $table) {
+        if (!$this->schema->hasTable('pr_category')) {
+            $this->schema->create('pr_category', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('user_id')->unsigned()->default(0);
-                $table->integer('parent_id')->unsigned()->default(0);
                 $table->string('name', 100);
-                $table->string('description', 500);
+                $table->string('description', 500)->nullable();
                 $table->string('slug', 100);
                 $table->string('photo', 500)->nullable();
                 $table->char('type', 2);
@@ -62,6 +61,6 @@ class CatalogTable extends Migration
      */
     public function down()
     {
-        $this->schema->drop('pr_catalog');
+        $this->schema->drop('pr_category');
     }
 }

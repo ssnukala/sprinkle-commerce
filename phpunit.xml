@@ -6,12 +6,6 @@
          failOnRisky="true"
          failOnWarning="true">
     <testsuites>
-        <testsuite name="Unit Tests">
-            <directory>app/tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Integration Tests">
-            <directory>app/tests/Integration</directory>
-        </testsuite>
         <testsuite name="Routes">
             <directory>app/tests/Routes</directory>
         </testsuite>

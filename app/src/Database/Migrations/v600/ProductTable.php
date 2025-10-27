@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2013-2016 Srinivas Nukala
  */
 
-namespace UserFrosting\Sprinkle\Commerce\Database\Migrations\v401;
+namespace UserFrosting\Sprinkle\Commerce\Database\Migrations\v600;
 
 use Illuminate\Database\Schema\Blueprint;
 use UserFrosting\Sprinkle\Core\Database\Migration;
@@ -24,7 +24,7 @@ class ProductTable extends Migration
 {
     public static $dependencies = [
         '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\PermissionsTable',
-        '\UserFrosting\Sprinkle\Commerce\Database\Migrations\v401\CategoryTable',
+        '\UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CategoryTable',
     ];
 
     /**

@@ -17,18 +17,16 @@ use UserFrosting\Sprinkle\Admin\Admin;
 use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\CRUD6\CRUD6;
 use UserFrosting\Sprinkle\SprinkleRecipe;
-use UserFrosting\Sprinkle\Commerce\Database\Migrations\v100\PaymentsTable;
-use UserFrosting\Sprinkle\Commerce\Database\Migrations\v100\PaymentDetailsTable;
-use UserFrosting\Sprinkle\Commerce\Database\Migrations\v401\CatalogTable;
-use UserFrosting\Sprinkle\Commerce\Database\Migrations\v401\CategoryTable;
-use UserFrosting\Sprinkle\Commerce\Database\Migrations\v401\ProductTable;
-use UserFrosting\Sprinkle\Commerce\Database\Migrations\v401\ProductCatalogTable;
-use UserFrosting\Sprinkle\Commerce\Database\Migrations\v401\ProductRolesTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CatalogTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CategoryTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductCatalogTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductRolesTable;
 
 /**
- * Commerce Sprinkle - Comprehensive eCommerce Solution for UserFrosting 6
+ * Commerce Sprinkle - eCommerce Solution for UserFrosting 6
  *
- * Combines order management, payment processing, and product catalog functionality:
+ * Combines order management and product catalog functionality:
  * 
  * ORDER MANAGEMENT:
  * - Sales Orders with line items
@@ -36,16 +34,14 @@ use UserFrosting\Sprinkle\Commerce\Database\Migrations\v401\ProductRolesTable;
  * - Shopping Cart functionality
  * - Order processing and checkout workflows
  * 
- * PAYMENT PROCESSING:
- * - Multiple payment gateways (Stripe, PayPal, Apple Pay, Google Pay, Manual Check)
- * - Payment tracking and refunds
- * - Payment webhooks
- * 
  * PRODUCT CATALOG:
  * - Products with categories
  * - Catalogs for organizing products
  * - Product-Catalog relationships
  * - Category management
+ *
+ * PAYMENT PROCESSING:
+ * - Requires sprinkle-payment as a peer dependency for payment processing
  *
  * This sprinkle uses CRUD6 for all CRUD operations on commerce-related tables.
  * All routes are automatically provided by CRUD6 via JSON schemas in app/schema/crud6/.
@@ -88,9 +84,7 @@ class Commerce implements SprinkleRecipe
      */
     public function getRoutes(): array
     {
-        return [
-            Routes\PaymentRoutes::class,
-        ];
+        return [];
     }
 
     /**
@@ -98,9 +92,7 @@ class Commerce implements SprinkleRecipe
      */
     public function getServices(): array
     {
-        return [
-            Services\PaymentService::class,
-        ];
+        return [];
     }
 
     /**
@@ -109,11 +101,7 @@ class Commerce implements SprinkleRecipe
     public function getMigrations(): array
     {
         return [
-            // Payment migrations (v100)
-            PaymentsTable::class,
-            PaymentDetailsTable::class,
-            
-            // Product catalog migrations (v401)
+            // Product catalog migrations (v600)
             CatalogTable::class,
             CategoryTable::class,
             ProductTable::class,

@@ -1,6 +1,8 @@
 # sprinkle-commerce Development Guidelines
 
-This sprinkle combines Order Management, Payment Processing, and Product Catalog functionality into a comprehensive eCommerce solution for UserFrosting 6. It depends on **[sprinkle-crud6](https://github.com/ssnukala/sprinkle-crud6)** (main branch) for all CRUD operations.
+This sprinkle combines Order Management and Product Catalog functionality for UserFrosting 6. It depends on **[sprinkle-crud6](https://github.com/ssnukala/sprinkle-crud6)** (main branch) for all CRUD operations.
+
+For payment processing, use **[sprinkle-payment](https://github.com/ssnukala/sprinkle-payment)** as a companion sprinkle.
 
 Always reference these instructions first and fallback to search or bash commands only when you encounter unexpected information that does not match the info here.
 
@@ -41,13 +43,12 @@ sprinkle-crud6 (main branch) provides a complete generic CRUD layer:
 ### What This Sprinkle Contains
 
 **✅ DO Include:**
-- JSON schema files in `app/schema/crud6/` for all commerce entities
-- Custom business logic controllers for workflows beyond CRUD (cart, checkout, payment)
-- Custom services for complex business logic (OrderService, CartService, PaymentService)
+- JSON schema files in `app/schema/crud6/` for commerce entities (orders and products)
+- Custom business logic controllers for workflows beyond CRUD (cart, checkout)
+- Custom services for complex business logic (OrderService, CartService)
 - Custom routes for non-CRUD operations
 - Tests for custom business logic
-- Payment processor implementations (Stripe, PayPal, Apple Pay, Google Pay, Manual Check)
-- Webhook handlers for payment gateway notifications
+- Vue.js components for shopping cart
 
 **❌ DO NOT Include:**
 - Custom Eloquent model classes (use CRUD6's generic model system)
@@ -55,6 +56,7 @@ sprinkle-crud6 (main branch) provides a complete generic CRUD layer:
 - Duplicate fillable/casts arrays (already in schemas)
 - Custom relationship methods for simple one-to-many (use detail sections)
 - Controllers that duplicate CRUD6's CRUD operations
+- Payment processing code (use sprinkle-payment instead)
 - Runtime folders (`app/cache`, `app/logs`, `app/sessions`, `app/storage`) - these are handled by the main UserFrosting application, not individual sprinkles
 
 ## 📁 Directory Structure Policy
@@ -67,21 +69,14 @@ sprinkle-crud6 (main branch) provides a complete generic CRUD layer:
 **UserFrosting 6 Standard Structure:**
 ```
 app/
-├── assets/         # Frontend assets (CSS, JS, Vue components)
-├── config/         # Configuration files
-├── locale/         # Translations
+├── assets/         # Frontend assets (Vue components)
 ├── schema/         # CRUD6 JSON schemas
-│   └── crud6/      # Schema files for all commerce entities
+│   └── crud6/      # Schema files for commerce entities
 ├── src/            # PHP source code
-│   ├── Controller/ # Business logic controllers
-│   ├── Database/   # Migrations and repositories
-│   │   ├── Migrations/
-│   │   │   ├── v100/  # Payment migrations
-│   │   │   └── v401/  # Product catalog migrations
-│   │   └── Repositories/
-│   ├── Routes/     # Custom routes
-│   └── Services/   # Business services and payment processors
-├── templates/      # Twig templates
+│   ├── Database/   # Migrations
+│   │   └── Migrations/
+│   │       └── v600/  # Product catalog migrations
+│   └── Commerce.php   # Main sprinkle class
 └── tests/          # Unit/integration tests
 ```
 
@@ -100,14 +95,13 @@ app/
 - Order workflow and status management
 - Mini cart widget for e-commerce
 
-### Payment Processing
-- **Payment Models** (schema: `payment`, `payment_detail`)
-- **Payment Gateways**: Stripe, PayPal, Apple Pay, Google Pay, Manual Check
-- Official SDKs: Stripe.js, PayPal JavaScript SDK, Payment Request API
+### Payment Processing (via sprinkle-payment)
+For payment processing capabilities, install **[sprinkle-payment](https://github.com/ssnukala/sprinkle-payment)** which provides:
+- Multiple payment gateways (Stripe, PayPal, Apple Pay, Google Pay, Manual Check)
+- Official SDKs for all payment providers
 - Payment tracking with detailed status and transaction information
-- Refund support through supported payment gateways
-- Webhook handlers for payment gateway notifications
-- PaymentService for orchestrating payment workflows
+- Refund support
+- Webhook handlers
 
 ### Product Catalog
 - **Products** (schema: `product`)
@@ -126,10 +120,6 @@ All models are defined via CRUD6 JSON schemas in `app/schema/crud6/`:
 - `sales_order_lines.json` - Sales order line items
 - `purchase_order.json` - Purchase order information
 - `purchase_order_lines.json` - Purchase order line items
-
-### Payment Schemas
-- `payment.json` - Payment transactions (one order can have multiple payments)
-- `payment_detail.json` - Detailed payment transaction information
 
 ### Product Schemas
 - `product.json` - Product information
@@ -188,14 +178,6 @@ All CRUD operations are handled through the CRUD6 API:
 - Delete: `DELETE /api/crud6/purchase_order/{id}`
 - Line Items: `GET /api/crud6/purchase_order/{id}/lines`
 
-### Payments
-- List: `GET /api/crud6/payment`
-- Create: `POST /api/crud6/payment`
-- Read: `GET /api/crud6/payment/{id}`
-- Update: `PUT /api/crud6/payment/{id}`
-- Delete: `DELETE /api/crud6/payment/{id}`
-- Details: `GET /api/crud6/payment/{id}/details`
-
 ### Products
 - List: `GET /api/crud6/product`
 - Create: `POST /api/crud6/product`
@@ -219,40 +201,11 @@ All CRUD operations are handled through the CRUD6 API:
 - Delete: `DELETE /api/crud6/catalog/{id}`
 - Product Catalog Relationships: `GET /api/crud6/catalog/{id}/product_catalog`
 
-### Custom Payment Endpoints
-- Process Payment: `POST /api/payment/process`
-- Webhook handlers for payment gateways
-
-## 💳 Payment Gateway Configuration
-
-Configure payment gateway credentials in your `.env` file:
-
-```env
-# Stripe
-STRIPE_PUBLIC_KEY=your_stripe_public_key
-STRIPE_SECRET_KEY=your_stripe_secret_key
-STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
-
-# PayPal
-PAYPAL_CLIENT_ID=your_paypal_client_id
-PAYPAL_CLIENT_SECRET=your_paypal_client_secret
-PAYPAL_MODE=sandbox
-
-# Apple Pay
-APPLE_PAY_MERCHANT_ID=your_apple_pay_merchant_id
-APPLE_PAY_CERTIFICATE_PATH=/path/to/certificate
-
-# Google Pay
-GOOGLE_PAY_MERCHANT_ID=your_google_pay_merchant_id
-GOOGLE_PAY_MERCHANT_NAME=Your Business Name
-```
-
 ## 🎨 Frontend Assets
 
 This sprinkle includes Vue.js components for:
 - **Mini Cart** (`app/assets/components/Cart/MiniCart.vue`)
 - **Cart Composables** (`app/assets/composables/useCart.ts`)
-- **Payment Widget** (`app/assets/js/payment-widget.js`)
 
 ## 🧪 Testing
 
@@ -262,7 +215,6 @@ composer test
 ```
 
 Test suites:
-- Unit Tests: `app/tests/Unit/`
 - Routes: `app/tests/Routes/`
 - Schema: `app/tests/Schema/`
 
@@ -273,7 +225,6 @@ All PHP classes use the namespace: `UserFrosting\Sprinkle\Commerce`
 ## 🔄 Migration Versions
 
 Migrations are organized by version:
-- **v100**: Payment-related tables
-- **v401**: Product catalog tables
+- **v600**: Product catalog tables (following UserFrosting 6 conventions)
 
 Migrations are registered in the `Commerce::getMigrations()` method.

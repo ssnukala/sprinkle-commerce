@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2013-2016 Srinivas Nukala
  */
 
-namespace UserFrosting\Sprinkle\Commerce\Database\Migrations\v401;
+namespace UserFrosting\Sprinkle\Commerce\Database\Migrations\v600;
 
 use UserFrosting\Sprinkle\Core\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,11 +21,12 @@ use Illuminate\Database\Schema\Builder;
  * @extends Migration
  * @author Srinivas Nukala
  */
-
-class CategoryTable extends Migration
+class ProductCatalogTable extends Migration
 {
     public static $dependencies = [
-        '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\PermissionsTable'
+        '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\PermissionsTable',
+        '\UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductTable',
+        '\UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CatalogTable'
     ];
 
     /**
@@ -33,14 +34,18 @@ class CategoryTable extends Migration
      */
     public function up()
     {
-        if (!$this->schema->hasTable('pr_category')) {
-            $this->schema->create('pr_category', function (Blueprint $table) {
+        if (!$this->schema->hasTable('pr_product_catalog')) {
+            $this->schema->create('pr_product_catalog', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
-                $table->string('description', 500)->nullable();
+                $table->integer('product_id')->unsigned()->default(0);
+                $table->integer('catalog_id')->unsigned()->default(0);
+                $table->string('name', 200)->nullable();
+                $table->text('description')->nullable();
                 $table->string('slug', 100);
                 $table->string('photo', 500)->nullable();
-                $table->char('type', 2);
+                $table->dateTime('active_date')->nullable();
+                $table->decimal('unit_price', 10, 2)->default(0.00);
+                $table->decimal('tax', 10, 2)->default(0.00);
                 $table->string('notes', 500)->nullable();
                 $table->json('meta')->nullable();
                 $table->char('status', 1)->default('A');
@@ -51,6 +56,8 @@ class CategoryTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8_unicode_ci';
                 $table->charset = 'utf8';
+                $table->index('product_id');
+                $table->index('catalog_id');
             });
         }
         // Permissions are now managed via CRUD6 schemas
@@ -61,6 +68,6 @@ class CategoryTable extends Migration
      */
     public function down()
     {
-        $this->schema->drop('pr_category');
+        $this->schema->drop('pr_product_catalog');
     }
 }

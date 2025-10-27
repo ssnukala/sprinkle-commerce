@@ -7,7 +7,7 @@
  * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Commerce\Database\Migrations\v401;
+namespace UserFrosting\Sprinkle\Commerce\Database\Migrations\v600;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
