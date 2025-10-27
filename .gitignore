@@ -1,0 +1,48 @@
+
+# .gitignore
+# Build artifacts
+# Composer
+# Dependencies
+# Dependency directories
+# Environment
+# Environment files
+# IDE
+# IDE and editor files
+# Logs
+# NPM/Yarn
+# OS Files
+# OS files
+# Test coverage
+# Testing
+# UserFrosting 6 Sprinkle - Products
+*.log
+*.swo
+*.swp
+*~
+.DS_Store
+.env
+.env.*.local
+.env.local
+.idea/
+.phpunit.result.cache
+.vscode/
+/.idea/
+/.phpunit.cache/
+/.vscode/
+/build/
+/coverage/
+/dist/
+/node_modules/
+/vendor/
+Thumbs.db
+build/
+composer.lock
+composer.phar
+coverage/
+dist/
+node_modules/
+npm-debug.log
+package-lock.json
+vendor/
+yarn-error.log
+yarn.lock
