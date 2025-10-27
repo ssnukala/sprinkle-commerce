@@ -1,0 +1,50 @@
+{
+  "name": "@ssnukala/sprinkle-commerce",
+  "version": "6.0.0-beta.1",
+  "description": "Comprehensive eCommerce Sprinkle for UserFrosting 6 - Orders, Payments, and Product Catalog",
+  "keywords": [
+    "userfrosting",
+    "sprinkle",
+    "ecommerce",
+    "orders",
+    "payment",
+    "products",
+    "catalog",
+    "sales",
+    "purchasing",
+    "cart"
+  ],
+  "author": "Srinivas Nukala <srinivas@nukala.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/ssnukala/sprinkle-commerce#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssnukala/sprinkle-commerce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ssnukala/sprinkle-commerce/issues"
+  },
+  "main": "app/assets/index.ts",
+  "types": "app/assets/index.ts",
+  "files": [
+    "app/assets/**/*",
+    "app/schema/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "@userfrosting/sprinkle-core": "^6.0.0",
+    "@userfrosting/sprinkle-admin": "^6.0.0",
+    "@ssnukala/sprinkle-crud6": "^1.0.0",
+    "vue": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "vue": "^3.3.0"
+  },
+  "scripts": {
+    "build": "echo 'No build step needed - assets handled by UserFrosting'",
+    "test": "echo 'No frontend tests yet'"
+  }
+}
