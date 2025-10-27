@@ -1,11 +1,14 @@
 /**
- * Orders Sprinkle - Vue.js Assets
+ * Commerce Sprinkle - Vue.js Assets
  * 
- * Main entry point for Orders sprinkle frontend components
+ * Main entry point for Commerce sprinkle frontend components
  */
 
 // Export cart components
 export * from './components/Cart';
+
+// Export pages
+export * from './pages';
 
 // Export composables
 export { useCart } from './composables/useCart';
