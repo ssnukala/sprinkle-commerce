@@ -53,5 +53,11 @@
         "test": "phpunit",
         "phpcs": "php-cs-fixer fix --dry-run --diff",
         "phpstan": "phpstan analyse app/src --level=5"
+    },
+    "repositories": {
+        "sprinkle-crud6": {
+            "type": "vcs",
+            "url": "https://github.com/ssnukala/sprinkle-crud6"
+        }
     }
 }
