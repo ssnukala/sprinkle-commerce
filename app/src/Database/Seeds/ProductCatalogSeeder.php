@@ -163,8 +163,7 @@ class ProductCatalogSeeder implements SeedInterface
             ];
         }
 
-        foreach ($relationships as $relation) {
-            $this->db->table('pr_product_catalog')->insert($relation);
-        }
+        // Bulk insert all relationships in a single query
+        $this->db->table('pr_product_catalog')->insert($relationships);
     }
 }
