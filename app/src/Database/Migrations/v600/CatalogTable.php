@@ -1,23 +1,25 @@
 <?php
 
-/**
- * SN DB Forms (http://www.srinivasnukala.com)
+declare(strict_types=1);
+
+/*
+ * UserFrosting Commerce Sprinkle (http://www.userfrosting.com)
  *
- * @link      https://github.com/ssnukala/ufsprinkle-autoforms/
- * @copyright Copyright (c) 2013-2016 Srinivas Nukala
+ * @link      https://github.com/ssnukala/sprinkle-commerce
+ * @copyright Copyright (c) 2025 Srinivas Nukala
+ * @license   https://github.com/ssnukala/sprinkle-commerce/blob/main/LICENSE (MIT License)
  */
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Migrations\v600;
 
 use UserFrosting\Sprinkle\Core\Database\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Schema\Builder;
 
 /**
- * Products table migration
- * Version 4.0.1
+ * Catalog table migration
+ * Version 6.0.0
  *
- * See https://laravel.com/docs/5.4/migrations#tables
+ * See https://laravel.com/docs/migrations
  * @extends Migration
  * @author Srinivas Nukala
  */

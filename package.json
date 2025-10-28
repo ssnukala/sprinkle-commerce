@@ -1,13 +1,13 @@
 {
   "name": "@ssnukala/sprinkle-commerce",
   "version": "6.0.0-beta.1",
-  "description": "Comprehensive eCommerce Sprinkle for UserFrosting 6 - Orders, Payments, and Product Catalog",
+  "description": "eCommerce Sprinkle for UserFrosting 6 - Orders and Product Catalog",
   "keywords": [
     "userfrosting",
     "sprinkle",
     "ecommerce",
+    "commerce",
     "orders",
-    "payment",
     "products",
     "catalog",
     "sales",

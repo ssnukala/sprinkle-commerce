@@ -3,26 +3,26 @@
 declare(strict_types=1);
 
 /*
- * UserFrosting Orders Sprinkle (http://www.userfrosting.com)
+ * UserFrosting Commerce Sprinkle (http://www.userfrosting.com)
  *
- * @link      https://github.com/ssnukala/sprinkle-orders
- * @copyright Copyright (c) 2024 Srinivas Nukala
- * @license   https://github.com/ssnukala/sprinkle-orders/blob/master/LICENSE (MIT License)
+ * @link      https://github.com/ssnukala/sprinkle-commerce
+ * @copyright Copyright (c) 2025 Srinivas Nukala
+ * @license   https://github.com/ssnukala/sprinkle-commerce/blob/main/LICENSE (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Orders\Tests\Routes;
+namespace UserFrosting\Sprinkle\Commerce\Tests\Routes;
 
-use UserFrosting\Sprinkle\Orders\Tests\OrdersTestCase;
+use UserFrosting\Sprinkle\Commerce\Tests\CommerceTestCase;
 
 /**
  * Tests for route registration
  */
-class RouteRegistrationTest extends OrdersTestCase
+class RouteRegistrationTest extends CommerceTestCase
 {
     /**
-     * Test that Orders sprinkle is loaded
+     * Test that Commerce sprinkle is loaded
      */
-    public function testOrdersSprinkleIsLoaded(): void
+    public function testCommerceSprinkleIsLoaded(): void
     {
         $sprinkles = $this->ci->get('sprinkleManager')->getSprinkles();
         
@@ -31,9 +31,9 @@ class RouteRegistrationTest extends OrdersTestCase
         }, $sprinkles);
         
         $this->assertContains(
-            'UserFrosting\Sprinkle\Orders\Orders',
+            'UserFrosting\Sprinkle\Commerce\Commerce',
             $sprinkleNames,
-            'Orders sprinkle should be loaded'
+            'Commerce sprinkle should be loaded'
         );
     }
 

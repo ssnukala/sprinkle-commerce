@@ -6,9 +6,9 @@ Built on top of **[sprinkle-crud6](https://github.com/ssnukala/sprinkle-crud6)**
 
 ## Overview
 
-This sprinkle provides:
-- **sprinkle-orders**: Order and cart management
-- **sprinkle-products**: Product catalog and category management
+This sprinkle provides comprehensive eCommerce functionality:
+- **Order Management**: Sales orders, purchase orders, and cart management
+- **Product Catalog**: Products, categories, and catalog management
 
 For payment processing, use **[sprinkle-payment](https://github.com/ssnukala/sprinkle-payment)** as a companion sprinkle.
 
@@ -94,18 +94,20 @@ php bakery migrate
 
 This sprinkle provides the following tables via migrations:
 
-### Order Tables (Schema only - no migrations)
-- **sales_order**: Sales order information
-- **sales_order_lines**: Sales order line items
-- **purchase_order**: Purchase order information
-- **purchase_order_lines**: Purchase order line items
+### Order Tables
+- **or_sales_order**: Sales order information
+- **or_sales_order_lines**: Sales order line items
+- **or_purchase_order**: Purchase order information
+- **or_purchase_order_lines**: Purchase order line items
 
-### Product Catalog Tables (with migrations)
-- **product**: Product information
-- **category**: Product categories
-- **catalog**: Product catalogs
-- **product_catalog**: Product-catalog relationships
-- **product_roles**: Product role permissions
+### Product Catalog Tables
+- **pr_product**: Product information
+- **pr_category**: Product categories
+- **pr_catalog**: Product catalogs
+- **pr_product_catalog**: Product-catalog relationships
+
+### Role Management
+- **roles**: Includes the `commerce-admin` role for managing all commerce operations
 
 All models are defined via CRUD6 JSON schemas in `app/schema/crud6/`.
 
