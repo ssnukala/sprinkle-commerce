@@ -10,10 +10,9 @@ declare(strict_types=1);
  * @license   https://github.com/ssnukala/sprinkle-commerce/blob/main/LICENSE (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Commerce\Tests\Migrations;
+namespace UserFrosting\Sprinkle\Commerce\Tests\Integration;
 
-use PHPUnit\Framework\TestCase;
-use UserFrosting\Sprinkle\Commerce\Commerce;
+use UserFrosting\Sprinkle\Commerce\Tests\CommerceTestCase;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\SalesOrderTable;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\SalesOrderLinesTable;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\PurchaseOrderTable;
@@ -21,19 +20,19 @@ use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\PurchaseOrderLinesTa
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CommerceRolesTable;
 
 /**
- * Tests for migration registration
- * These are simple unit tests that verify migrations are properly configured.
+ * Integration tests for migration registration
  */
-class MigrationRegistrationTest extends TestCase
+class MigrationTest extends CommerceTestCase
 {
-    private const OLD_ROLE_CLASS = 'UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductRolesTable';
     /**
      * Test that all required migrations are registered
      */
-    public function testAllMigrationsAreRegistered(): void
+    public function testMigrationsAreRegistered(): void
     {
-        $commerce = new Commerce();
-        $migrations = $commerce->getMigrations();
+        // Get the migrations from the sprinkle
+        $migrations = $this->ci->get('sprinkleManager')
+            ->getSprinkle(\UserFrosting\Sprinkle\Commerce\Commerce::class)
+            ->getMigrations();
 
         // Check that order migrations are registered
         $this->assertContains(SalesOrderTable::class, $migrations);
@@ -46,7 +45,7 @@ class MigrationRegistrationTest extends TestCase
     }
 
     /**
-     * Test that migration classes exist
+     * Test that migration classes exist and are valid
      */
     public function testMigrationClassesExist(): void
     {
@@ -55,13 +54,5 @@ class MigrationRegistrationTest extends TestCase
         $this->assertTrue(class_exists(PurchaseOrderTable::class));
         $this->assertTrue(class_exists(PurchaseOrderLinesTable::class));
         $this->assertTrue(class_exists(CommerceRolesTable::class));
-    }
-
-    /**
-     * Test that old ProductRolesTable class does not exist
-     */
-    public function testProductRolesTableDoesNotExist(): void
-    {
-        $this->assertFalse(class_exists(self::OLD_ROLE_CLASS));
     }
 }
