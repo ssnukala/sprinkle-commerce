@@ -21,6 +21,15 @@
     "list_fields": ["line_no", "description", "unit_price", "quantity", "gross_amount"],
     "title": "Order Line Items"
   },
+  "detail_editable": {
+    "model": "sales_order_lines",
+    "foreign_key": "order_id",
+    "fields": ["line_no", "description", "product_catalog_id", "unit_price", "quantity", "net_amount", "tax", "discount", "gross_amount"],
+    "title": "Order Line Items",
+    "allow_add": true,
+    "allow_edit": true,
+    "allow_delete": true
+  },
   "fields": {
     "id": {
       "type": "integer",

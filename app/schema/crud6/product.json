@@ -15,6 +15,15 @@
   "default_sort": {
     "id": "desc"
   },
+  "detail_editable": {
+    "model": "product_catalog",
+    "foreign_key": "product_id",
+    "fields": ["catalog_id", "name", "description", "unit_price", "tax", "active_date", "status"],
+    "title": "Catalog Assignments",
+    "allow_add": true,
+    "allow_edit": true,
+    "allow_delete": true
+  },
   "fields": {
     "id": {
       "type": "integer",

@@ -10,6 +10,9 @@ export * from './components/Cart';
 // Export pages
 export * from './pages';
 
+// Export routes
+export { default as CommerceRoutes } from './routes';
+
 // Export composables
 export { useCart } from './composables/useCart';
 

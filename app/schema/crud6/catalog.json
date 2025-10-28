@@ -21,6 +21,15 @@
     "list_fields": ["product_id", "name", "unit_price", "status"],
     "title": "Catalog Products"
   },
+  "detail_editable": {
+    "model": "product_catalog",
+    "foreign_key": "catalog_id",
+    "fields": ["product_id", "name", "description", "unit_price", "tax", "active_date", "status"],
+    "title": "Catalog Products",
+    "allow_add": true,
+    "allow_edit": true,
+    "allow_delete": true
+  },
   "fields": {
     "id": {
       "type": "integer",
