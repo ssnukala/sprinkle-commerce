@@ -23,7 +23,7 @@ export default [
                         slug: 'uri_sales_orders'
                     }
                 },
-                component: () => import('@ssnukala/sprinkle-crud6/views/PageList.vue'),
+                component: () => import('@ssnukala/sprinkle-crud6/views').then(m => m.CRUD6ListPage),
                 props: () => ({ model: 'sales_order' })
             },
             {
@@ -68,7 +68,7 @@ export default [
                         slug: 'uri_products'
                     }
                 },
-                component: () => import('@ssnukala/sprinkle-crud6/views/PageList.vue'),
+                component: () => import('@ssnukala/sprinkle-crud6/views').then(m => m.CRUD6ListPage),
                 props: () => ({ model: 'product' })
             },
             {
@@ -113,7 +113,7 @@ export default [
                         slug: 'uri_catalogs'
                     }
                 },
-                component: () => import('@ssnukala/sprinkle-crud6/views/PageList.vue'),
+                component: () => import('@ssnukala/sprinkle-crud6/views').then(m => m.CRUD6ListPage),
                 props: () => ({ model: 'catalog' })
             },
             {
