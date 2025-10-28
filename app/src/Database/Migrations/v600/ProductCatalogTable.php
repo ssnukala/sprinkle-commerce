@@ -23,16 +23,10 @@ use Illuminate\Database\Schema\Builder;
  */
 class ProductCatalogTable extends Migration
 {
-    public static $dependencies = [
-        '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\PermissionsTable',
-        '\UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductTable',
-        '\UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CatalogTable'
-    ];
-
     /**
      * {@inheritDoc}
      */
-    public function up()
+    public function up(): void
     {
         if (!$this->schema->hasTable('pr_product_catalog')) {
             $this->schema->create('pr_product_catalog', function (Blueprint $table) {
@@ -66,7 +60,7 @@ class ProductCatalogTable extends Migration
     /**
      * {@inheritDoc}
      */
-    public function down()
+    public function down(): void
     {
         $this->schema->drop('pr_product_catalog');
     }

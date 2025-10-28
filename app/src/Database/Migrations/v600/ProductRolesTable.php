@@ -25,15 +25,10 @@ use UserFrosting\Sprinkle\Core\Database\Migration;
  */
 class ProductRolesTable extends Migration
 {
-    public static $dependencies = [
-        '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\PermissionsTable',
-        '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\RolesTable'
-    ];
-
     /**
      * {@inheritDoc}
      */
-    public function up()
+    public function up(): void
     {
         if ($this->schema->hasTable('roles')) {
             // Add default roles
@@ -57,7 +52,7 @@ class ProductRolesTable extends Migration
     /**
      * {@inheritDoc}
      */
-    public function down()
+    public function down(): void
     {
         Role::whereIn('slug', ['product-admin'])->delete();
     }

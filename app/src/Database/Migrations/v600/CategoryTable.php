@@ -24,14 +24,10 @@ use Illuminate\Database\Schema\Builder;
 
 class CategoryTable extends Migration
 {
-    public static $dependencies = [
-        '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\PermissionsTable'
-    ];
-
     /**
      * {@inheritDoc}
      */
-    public function up()
+    public function up(): void
     {
         if (!$this->schema->hasTable('pr_category')) {
             $this->schema->create('pr_category', function (Blueprint $table) {
@@ -59,7 +55,7 @@ class CategoryTable extends Migration
     /**
      * {@inheritDoc}
      */
-    public function down()
+    public function down(): void
     {
         $this->schema->drop('pr_category');
     }

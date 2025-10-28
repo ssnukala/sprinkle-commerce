@@ -15,6 +15,7 @@ namespace UserFrosting\Sprinkle\Commerce;
 use UserFrosting\Sprinkle\Account\Account;
 use UserFrosting\Sprinkle\Admin\Admin;
 use UserFrosting\Sprinkle\Core\Core;
+use UserFrosting\Sprinkle\Core\Sprinkle\Recipe\MigrationRecipe;
 use UserFrosting\Sprinkle\CRUD6\CRUD6;
 use UserFrosting\Sprinkle\SprinkleRecipe;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CatalogTable;
@@ -48,7 +49,7 @@ use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductRolesTable;
  * No custom models needed - CRUD6's generic model system handles everything.
  * Detail sections in schemas define one-to-many relationships.
  */
-class Commerce implements SprinkleRecipe
+class Commerce implements SprinkleRecipe, MigrationRecipe
 {
     /**
      * {@inheritdoc}

@@ -22,15 +22,10 @@ use UserFrosting\Sprinkle\Core\Database\Migration;
  */
 class ProductTable extends Migration
 {
-    public static $dependencies = [
-        '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\PermissionsTable',
-        '\UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CategoryTable',
-    ];
-
     /**
      * {@inheritDoc}
      */
-    public function up()
+    public function up(): void
     {
         if (!$this->schema->hasTable('pr_product')) {
             $this->schema->create('pr_product', function (Blueprint $table) {
@@ -63,7 +58,7 @@ class ProductTable extends Migration
     /**
      * {@inheritDoc}
      */
-    public function down()
+    public function down(): void
     {
         $this->schema->drop('pr_product');
     }
