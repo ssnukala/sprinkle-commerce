@@ -17,6 +17,7 @@ For payment processing, use **[sprinkle-payment](https://github.com/ssnukala/spr
 ### 🛒 Order Management
 - **Sales Orders** with line items
 - **Purchase Orders** with line items
+- **Master-Detail Forms**: Create orders with line items in a single form
 - Shopping Cart functionality with Vue.js components
 - Order workflow and status management
 - Mini cart widget for e-commerce sites
@@ -25,7 +26,8 @@ For payment processing, use **[sprinkle-payment](https://github.com/ssnukala/spr
 - **Product Management**: Full product CRUD with rich attributes
 - **Categories**: Hierarchical category organization
 - **Catalogs**: Organize products into multiple catalogs
-- **Product-Catalog Relationships**: Flexible product organization
+- **Product-Catalog Relationships**: Flexible product organization with master-detail forms
+- **Bidirectional Management**: Manage from product or catalog perspective
 
 ### 💳 Payment Processing (via sprinkle-payment)
 For payment processing capabilities, install **[sprinkle-payment](https://github.com/ssnukala/sprinkle-payment)** which provides:
@@ -213,6 +215,30 @@ addItem({
   name: 'Product Name'
 });
 ```
+
+## Master-Detail Pages
+
+This sprinkle includes master-detail data entry pages based on [sprinkle-crud6 PR #130](https://github.com/ssnukala/sprinkle-crud6/pull/130):
+
+### Sales Order Entry
+Create and edit sales orders with line items in a single form:
+- Route: `/commerce/sales-orders/create` and `/commerce/sales-orders/:id`
+- Uses `UFCRUD6MasterDetailForm` component
+- Inline editing of line items with add/edit/delete capabilities
+
+### Product Catalog Management
+Manage products with catalog assignments:
+- Route: `/commerce/products/create` and `/commerce/products/:id`
+- Assign products to multiple catalogs
+- Custom pricing per catalog
+
+### Catalog Product Management
+Manage catalogs with product assignments:
+- Route: `/commerce/catalogs/create` and `/commerce/catalogs/:id`
+- Add multiple products to a catalog
+- Inline editing of product details
+
+For detailed documentation, see [Master-Detail Pages Documentation](docs/MASTER_DETAIL_PAGES.md).
 
 ## Testing
 
