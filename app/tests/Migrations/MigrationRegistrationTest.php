@@ -22,9 +22,11 @@ use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CommerceRolesTable;
 
 /**
  * Tests for migration registration
+ * These are simple unit tests that verify migrations are properly configured.
  */
 class MigrationRegistrationTest extends TestCase
 {
+    private const OLD_ROLE_CLASS = 'UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductRolesTable';
     /**
      * Test that all required migrations are registered
      */
@@ -60,6 +62,6 @@ class MigrationRegistrationTest extends TestCase
      */
     public function testProductRolesTableDoesNotExist(): void
     {
-        $this->assertFalse(class_exists('UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductRolesTable'));
+        $this->assertFalse(class_exists(self::OLD_ROLE_CLASS));
     }
 }
