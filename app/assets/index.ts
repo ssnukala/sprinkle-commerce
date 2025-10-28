@@ -4,17 +4,17 @@
  * Main entry point for Commerce sprinkle frontend components
  */
 
-// Export cart components
-export * from './components/Cart';
+// Export components
+export * from './components';
+
+// Export composables  
+export * from './composables';
+
+// Export interfaces
+export * from './interfaces';
 
 // Export pages
 export * from './pages';
 
 // Export routes
-export { default as CommerceRoutes } from './routes';
-
-// Export composables
-export { useCart } from './composables/useCart';
-
-// Export interfaces
-export type * from './interfaces/CartInterface';
+export * from './routes';
