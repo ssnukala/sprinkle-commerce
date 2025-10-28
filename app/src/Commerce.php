@@ -22,7 +22,11 @@ use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CatalogTable;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CategoryTable;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductTable;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductCatalogTable;
-use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\ProductRolesTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CommerceRolesTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\SalesOrderTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\SalesOrderLinesTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\PurchaseOrderTable;
+use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\PurchaseOrderLinesTable;
 
 /**
  * Commerce Sprinkle - eCommerce Solution for UserFrosting 6
@@ -107,7 +111,12 @@ class Commerce implements SprinkleRecipe, MigrationRecipe
             CategoryTable::class,
             ProductTable::class,
             ProductCatalogTable::class,
-            ProductRolesTable::class,
+            CommerceRolesTable::class,
+            // Order management migrations (v600)
+            SalesOrderTable::class,
+            SalesOrderLinesTable::class,
+            PurchaseOrderTable::class,
+            PurchaseOrderLinesTable::class,
         ];
     }
 

@@ -15,15 +15,15 @@ use UserFrosting\Sprinkle\Account\Database\Models\Role;
 use UserFrosting\Sprinkle\Core\Database\Migration;
 
 /**
- * Roles table migration
- * Roles replace "groups" in UF 0.3.x.  Users acquire permissions through roles.
- * Version 4.0.0
+ * Commerce Roles table migration
+ * Adds the commerce-admin role for all commerce CRUD operations
+ * Version 6.0.0
  *
  * See https://laravel.com/docs/5.4/migrations#tables
  * @extends Migration
- * @author Alex Weissman (https://alexanderweissman.com)
+ * @author Srinivas Nukala
  */
-class ProductRolesTable extends Migration
+class CommerceRolesTable extends Migration
 {
     /**
      * {@inheritDoc}
@@ -34,10 +34,10 @@ class ProductRolesTable extends Migration
             // Add default roles
             //
             $roles = [
-                'product-admin' => new Role([
-                    'slug' => 'product-admin',
-                    'name' => 'Product Admin',
-                    'description' => 'Product Admin Role.'
+                'commerce-admin' => new Role([
+                    'slug' => 'commerce-admin',
+                    'name' => 'Commerce Admin',
+                    'description' => 'Commerce Admin Role for managing all commerce-related operations including orders, products, catalogs, and categories.'
                 ])
             ];
 
@@ -54,6 +54,6 @@ class ProductRolesTable extends Migration
      */
     public function down(): void
     {
-        Role::whereIn('slug', ['product-admin'])->delete();
+        Role::whereIn('slug', ['commerce-admin'])->delete();
     }
 }
