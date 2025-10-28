@@ -29,6 +29,26 @@ class ProductCatalogSeeder implements SeedInterface
     }
 
     /**
+     * Get product unit price from the database
+     */
+    private function getProductPrice(int $productId): float
+    {
+        $product = $this->db->table('pr_product')
+            ->where('id', $productId)
+            ->first();
+        
+        return $product ? (float) $product->unit_price : 0.00;
+    }
+
+    /**
+     * Generate a slug for product catalog entry
+     */
+    private function generateSlug(int $productId, int $catalogId): string
+    {
+        return "product-{$productId}-catalog-{$catalogId}";
+    }
+
+    /**
      * Run the database seeds.
      */
     public function run(): void
@@ -41,9 +61,10 @@ class ProductCatalogSeeder implements SeedInterface
             $relationships[] = [
                 'product_id' => $productId,
                 'catalog_id' => 1,
+                'slug' => $this->generateSlug($productId, 1),
                 'name' => 'Main Catalog Listing',
                 'description' => 'Standard listing in main catalog',
-                'unit_price' => null, // Use product's default price
+                'unit_price' => $this->getProductPrice($productId),
                 'tax' => 0.00,
                 'status' => 'A',
                 'active_date' => $now,
@@ -58,9 +79,10 @@ class ProductCatalogSeeder implements SeedInterface
             $relationships[] = [
                 'product_id' => $productId,
                 'catalog_id' => 2,
+                'slug' => $this->generateSlug($productId, 2),
                 'name' => 'Holiday Special',
                 'description' => 'Special holiday pricing',
-                'unit_price' => null,
+                'unit_price' => $this->getProductPrice($productId),
                 'tax' => 0.00,
                 'status' => 'A',
                 'active_date' => $now,
@@ -75,9 +97,10 @@ class ProductCatalogSeeder implements SeedInterface
             $relationships[] = [
                 'product_id' => $productId,
                 'catalog_id' => 3,
+                'slug' => $this->generateSlug($productId, 3),
                 'name' => 'Back to School Item',
                 'description' => 'Essential for students',
-                'unit_price' => null,
+                'unit_price' => $this->getProductPrice($productId),
                 'tax' => 0.00,
                 'status' => 'A',
                 'active_date' => $now,
@@ -92,9 +115,10 @@ class ProductCatalogSeeder implements SeedInterface
             $relationships[] = [
                 'product_id' => $productId,
                 'catalog_id' => 7,
+                'slug' => $this->generateSlug($productId, 7),
                 'name' => 'New Arrival',
                 'description' => 'Recently added product',
-                'unit_price' => null,
+                'unit_price' => $this->getProductPrice($productId),
                 'tax' => 0.00,
                 'status' => 'A',
                 'active_date' => $now,
@@ -109,9 +133,10 @@ class ProductCatalogSeeder implements SeedInterface
             $relationships[] = [
                 'product_id' => $productId,
                 'catalog_id' => 8,
+                'slug' => $this->generateSlug($productId, 8),
                 'name' => 'Best Seller',
                 'description' => 'Top selling product',
-                'unit_price' => null,
+                'unit_price' => $this->getProductPrice($productId),
                 'tax' => 0.00,
                 'status' => 'A',
                 'active_date' => $now,
@@ -126,9 +151,10 @@ class ProductCatalogSeeder implements SeedInterface
             $relationships[] = [
                 'product_id' => $productId,
                 'catalog_id' => 9,
+                'slug' => $this->generateSlug($productId, 9),
                 'name' => 'Premium Product',
                 'description' => 'High-end quality item',
-                'unit_price' => null,
+                'unit_price' => $this->getProductPrice($productId),
                 'tax' => 0.00,
                 'status' => 'A',
                 'active_date' => $now,
