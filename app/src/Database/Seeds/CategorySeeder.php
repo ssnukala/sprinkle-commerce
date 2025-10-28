@@ -12,14 +12,22 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Seeds;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Connection;
+use UserFrosting\Sprinkle\Core\Seeder\SeedInterface;
 
 /**
  * Seeder for product categories
  */
-class CategorySeeder extends Seeder
+class CategorySeeder implements SeedInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected Connection $db,
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
@@ -48,10 +56,11 @@ class CategorySeeder extends Seeder
             ['name' => 'Jewelry', 'description' => 'Jewelry and watches', 'slug' => 'jewelry', 'type' => 'PR', 'status' => 'A'],
         ];
 
+        $now = date('Y-m-d H:i:s');
         foreach ($categories as $category) {
-            DB::table('pr_category')->insert(array_merge($category, [
-                'created_at' => now(),
-                'updated_at' => now(),
+            $this->db->table('pr_category')->insert(array_merge($category, [
+                'created_at' => $now,
+                'updated_at' => $now,
             ]));
         }
     }

@@ -12,20 +12,28 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Seeds;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Connection;
+use UserFrosting\Sprinkle\Core\Seeder\SeedInterface;
 
 /**
  * Seeder for product-catalog relationships
  */
-class ProductCatalogSeeder extends Seeder
+class ProductCatalogSeeder implements SeedInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected Connection $db,
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $now = now();
+        $now = date('Y-m-d H:i:s');
         $relationships = [];
 
         // Add all products to Main Catalog (catalog_id: 1)
@@ -130,7 +138,7 @@ class ProductCatalogSeeder extends Seeder
         }
 
         foreach ($relationships as $relation) {
-            DB::table('pr_product_catalog')->insert($relation);
+            $this->db->table('pr_product_catalog')->insert($relation);
         }
     }
 }

@@ -12,14 +12,22 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Seeds;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Connection;
+use UserFrosting\Sprinkle\Core\Seeder\SeedInterface;
 
 /**
  * Seeder for products
  */
-class ProductSeeder extends Seeder
+class ProductSeeder implements SeedInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected Connection $db,
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
@@ -83,9 +91,9 @@ class ProductSeeder extends Seeder
             ['category_id' => 13, 'name' => 'Camping Tent', 'description' => '4-person waterproof camping tent', 'slug' => 'camping-tent', 'type' => 'PH', 'unit_price' => 199.99, 'tax' => 16.00, 'status' => 'A'],
         ];
 
-        $now = now();
+        $now = date('Y-m-d H:i:s');
         foreach ($products as $product) {
-            DB::table('pr_product')->insert(array_merge($product, [
+            $this->db->table('pr_product')->insert(array_merge($product, [
                 'active_date' => $now,
                 'created_at' => $now,
                 'updated_at' => $now,

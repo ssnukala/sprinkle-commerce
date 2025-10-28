@@ -12,21 +12,34 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Seeds;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Illuminate\Database\Connection;
+use UserFrosting\Sprinkle\Core\Seeder\SeedInterface;
 
 /**
  * Seeder for purchase orders
  */
-class PurchaseOrderSeeder extends Seeder
+class PurchaseOrderSeeder implements SeedInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected Connection $db,
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $now = Carbon::now();
+        $now = date('Y-m-d H:i:s');
+        $date45DaysAgo = date('Y-m-d H:i:s', strtotime('-45 days'));
+        $date30DaysAgo = date('Y-m-d H:i:s', strtotime('-30 days'));
+        $date20DaysAgo = date('Y-m-d H:i:s', strtotime('-20 days'));
+        $date10DaysAgo = date('Y-m-d H:i:s', strtotime('-10 days'));
+        $date5DaysAgo = date('Y-m-d H:i:s', strtotime('-5 days'));
+        $date10DaysAhead = date('Y-m-d H:i:s', strtotime('+10 days'));
         
         $orders = [
             [
@@ -39,7 +52,7 @@ class PurchaseOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(45),
+                'order_date' => $date45DaysAgo,
                 'expiry_date' => null,
                 'net_amount' => 15000.00,
                 'tax' => 1200.00,
@@ -63,7 +76,7 @@ class PurchaseOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(30),
+                'order_date' => $date30DaysAgo,
                 'expiry_date' => null,
                 'net_amount' => 5000.00,
                 'tax' => 400.00,
@@ -87,8 +100,8 @@ class PurchaseOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(20),
-                'expiry_date' => $now->copy()->addDays(10),
+                'order_date' => $date20DaysAgo,
+                'expiry_date' => $date10DaysAhead,
                 'net_amount' => 24000.00,
                 'tax' => 1920.00,
                 'discount' => 1000.00,
@@ -111,7 +124,7 @@ class PurchaseOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(10),
+                'order_date' => $date10DaysAgo,
                 'expiry_date' => null,
                 'net_amount' => 8000.00,
                 'tax' => 640.00,
@@ -135,7 +148,7 @@ class PurchaseOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(5),
+                'order_date' => $date5DaysAgo,
                 'expiry_date' => null,
                 'net_amount' => 12000.00,
                 'tax' => 960.00,
@@ -152,7 +165,7 @@ class PurchaseOrderSeeder extends Seeder
         ];
 
         foreach ($orders as $order) {
-            DB::table('or_purchase_order')->insert(array_merge($order, [
+            $this->db->table('or_purchase_order')->insert(array_merge($order, [
                 'created_at' => $order['order_date'],
                 'updated_at' => $now,
             ]));

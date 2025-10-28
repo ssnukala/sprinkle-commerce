@@ -12,21 +12,35 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Seeds;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Illuminate\Database\Connection;
+use UserFrosting\Sprinkle\Core\Seeder\SeedInterface;
 
 /**
  * Seeder for sales orders
  */
-class SalesOrderSeeder extends Seeder
+class SalesOrderSeeder implements SeedInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected Connection $db,
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $now = Carbon::now();
+        $now = date('Y-m-d H:i:s');
+        $date30DaysAgo = date('Y-m-d H:i:s', strtotime('-30 days'));
+        $date25DaysAgo = date('Y-m-d H:i:s', strtotime('-25 days'));
+        $date20DaysAgo = date('Y-m-d H:i:s', strtotime('-20 days'));
+        $date15DaysAgo = date('Y-m-d H:i:s', strtotime('-15 days'));
+        $date7DaysAgo = date('Y-m-d H:i:s', strtotime('-7 days'));
+        $date5DaysAgo = date('Y-m-d H:i:s', strtotime('-5 days'));
+        $date25DaysAhead = date('Y-m-d H:i:s', strtotime('+25 days'));
         
         $orders = [
             [
@@ -40,7 +54,7 @@ class SalesOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(30),
+                'order_date' => $date30DaysAgo,
                 'expiry_date' => null,
                 'net_amount' => 1379.96,
                 'tax' => 110.40,
@@ -50,7 +64,7 @@ class SalesOrderSeeder extends Seeder
                 'payment_type' => 'credit_card',
                 'payment_ref' => 'CC-12345',
                 'payment_link' => null,
-                'payment_date' => $now->copy()->subDays(30),
+                'payment_date' => $date30DaysAgo,
                 'payment_note' => 'Paid in full',
                 'notes' => 'Customer requested expedited shipping',
                 'status' => 'A',
@@ -66,7 +80,7 @@ class SalesOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(25),
+                'order_date' => $date25DaysAgo,
                 'expiry_date' => null,
                 'net_amount' => 799.98,
                 'tax' => 64.00,
@@ -76,7 +90,7 @@ class SalesOrderSeeder extends Seeder
                 'payment_type' => 'invoice',
                 'payment_ref' => 'INV-2025-002',
                 'payment_link' => null,
-                'payment_date' => $now->copy()->subDays(20),
+                'payment_date' => $date20DaysAgo,
                 'payment_note' => 'Net 30 payment terms',
                 'notes' => 'Business customer - approved credit',
                 'status' => 'A',
@@ -92,8 +106,8 @@ class SalesOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(5),
-                'expiry_date' => $now->copy()->addDays(25),
+                'order_date' => $date5DaysAgo,
+                'expiry_date' => $date25DaysAhead,
                 'net_amount' => 819.97,
                 'tax' => 65.60,
                 'discount' => 0.00,
@@ -118,7 +132,7 @@ class SalesOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(15),
+                'order_date' => $date15DaysAgo,
                 'expiry_date' => null,
                 'net_amount' => 799.99,
                 'tax' => 64.00,
@@ -128,7 +142,7 @@ class SalesOrderSeeder extends Seeder
                 'payment_type' => 'credit_card',
                 'payment_ref' => 'CC-23456',
                 'payment_link' => null,
-                'payment_date' => $now->copy()->subDays(15),
+                'payment_date' => $date15DaysAgo,
                 'payment_note' => 'Trade-in discount applied',
                 'notes' => 'Customer traded in old device',
                 'status' => 'A',
@@ -144,7 +158,7 @@ class SalesOrderSeeder extends Seeder
                 'parent_id' => null,
                 'user_id' => 1,
                 'approver_id' => null,
-                'order_date' => $now->copy()->subDays(7),
+                'order_date' => $date7DaysAgo,
                 'expiry_date' => null,
                 'net_amount' => 1199.98,
                 'tax' => 96.00,
@@ -154,7 +168,7 @@ class SalesOrderSeeder extends Seeder
                 'payment_type' => 'credit_card',
                 'payment_ref' => 'CC-34567',
                 'payment_link' => null,
-                'payment_date' => $now->copy()->subDays(7),
+                'payment_date' => $date7DaysAgo,
                 'payment_note' => 'Paid in full',
                 'notes' => 'Shipped via express courier',
                 'status' => 'A',
@@ -162,7 +176,7 @@ class SalesOrderSeeder extends Seeder
         ];
 
         foreach ($orders as $order) {
-            DB::table('or_sales_order')->insert(array_merge($order, [
+            $this->db->table('or_sales_order')->insert(array_merge($order, [
                 'created_at' => $order['order_date'],
                 'updated_at' => $now,
             ]));

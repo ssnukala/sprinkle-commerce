@@ -12,30 +12,43 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Seeds;
 
-use Illuminate\Database\Seeder;
+use UserFrosting\Sprinkle\Core\Seeder\SeedInterface;
 
 /**
  * Master seeder for Commerce sprinkle
  * 
  * Seeds all commerce tables with sample data for testing
  */
-class CommerceSeeder extends Seeder
+class CommerceSeeder implements SeedInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected CategorySeeder $categorySeeder,
+        protected CatalogSeeder $catalogSeeder,
+        protected ProductSeeder $productSeeder,
+        protected ProductCatalogSeeder $productCatalogSeeder,
+        protected SalesOrderSeeder $salesOrderSeeder,
+        protected SalesOrderLinesSeeder $salesOrderLinesSeeder,
+        protected PurchaseOrderSeeder $purchaseOrderSeeder,
+        protected PurchaseOrderLinesSeeder $purchaseOrderLinesSeeder,
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
         // Seed in proper order to respect foreign key constraints
-        $this->call([
-            CategorySeeder::class,
-            CatalogSeeder::class,
-            ProductSeeder::class,
-            ProductCatalogSeeder::class,
-            SalesOrderSeeder::class,
-            SalesOrderLinesSeeder::class,
-            PurchaseOrderSeeder::class,
-            PurchaseOrderLinesSeeder::class,
-        ]);
+        $this->categorySeeder->run();
+        $this->catalogSeeder->run();
+        $this->productSeeder->run();
+        $this->productCatalogSeeder->run();
+        $this->salesOrderSeeder->run();
+        $this->salesOrderLinesSeeder->run();
+        $this->purchaseOrderSeeder->run();
+        $this->purchaseOrderLinesSeeder->run();
     }
 }

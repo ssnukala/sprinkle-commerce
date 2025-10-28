@@ -12,20 +12,28 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Seeds;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Connection;
+use UserFrosting\Sprinkle\Core\Seeder\SeedInterface;
 
 /**
  * Seeder for purchase order line items
  */
-class PurchaseOrderLinesSeeder extends Seeder
+class PurchaseOrderLinesSeeder implements SeedInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected Connection $db,
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $now = now();
+        $now = date('Y-m-d H:i:s');
         
         $lines = [
             // PO-001 lines (Electronics restock)
@@ -57,7 +65,7 @@ class PurchaseOrderLinesSeeder extends Seeder
         ];
 
         foreach ($lines as $line) {
-            DB::table('or_purchase_order_lines')->insert(array_merge($line, [
+            $this->db->table('or_purchase_order_lines')->insert(array_merge($line, [
                 'created_at' => $now,
                 'updated_at' => $now,
             ]));
