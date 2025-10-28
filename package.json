@@ -33,9 +33,9 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "@userfrosting/sprinkle-core": "^6.0.0",
-    "@userfrosting/sprinkle-admin": "^6.0.0",
-    "@ssnukala/sprinkle-crud6": "^1.0.0",
+    "@userfrosting/sprinkle-account": "^6.0.0-beta",
+    "@userfrosting/sprinkle-core": "^6.0.0-beta",
+    "@ssnukala/sprinkle-crud6": "dev-main",
     "vue": "^3.3.0"
   },
   "devDependencies": {
