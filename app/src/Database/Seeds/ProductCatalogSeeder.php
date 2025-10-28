@@ -40,13 +40,17 @@ class ProductCatalogSeeder implements SeedInterface
      * @param int $productId Product ID to look up
      * @return float Unit price or 0.00 if product not found
      */
-    private function getProductUnitPrice($products, int $productId): float
+    private function getProductUnitPrice(\Illuminate\Support\Collection $products, int $productId): float
     {
         return isset($products[$productId]) ? (float) $products[$productId]->unit_price : 0.00;
     }
 
     /**
      * Generate a slug for product catalog entry
+     * 
+     * @param int $productId Product ID
+     * @param int $catalogId Catalog ID
+     * @return string Slug in format "product-{id}-catalog-{id}"
      */
     private function generateSlug(int $productId, int $catalogId): string
     {
