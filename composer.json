@@ -25,7 +25,7 @@
         "userfrosting/sprinkle-core": "^6.0",
         "userfrosting/sprinkle-account": "^6.0",
         "userfrosting/sprinkle-admin": "^6.0",
-        "ssnukala/sprinkle-crud6": "^1.0"
+        "ssnukala/sprinkle-crud6": "dev-main"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
