@@ -16,6 +16,7 @@ use UserFrosting\Sprinkle\Account\Account;
 use UserFrosting\Sprinkle\Admin\Admin;
 use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\Core\Sprinkle\Recipe\MigrationRecipe;
+use UserFrosting\Sprinkle\Core\Sprinkle\Recipe\SeedRecipe;
 use UserFrosting\Sprinkle\CRUD6\CRUD6;
 use UserFrosting\Sprinkle\SprinkleRecipe;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\CatalogTable;
@@ -27,6 +28,15 @@ use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\SalesOrderTable;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\SalesOrderLinesTable;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\PurchaseOrderTable;
 use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\PurchaseOrderLinesTable;
+use UserFrosting\Sprinkle\Commerce\Database\Seeds\CatalogSeeder;
+use UserFrosting\Sprinkle\Commerce\Database\Seeds\CategorySeeder;
+use UserFrosting\Sprinkle\Commerce\Database\Seeds\CommerceSeeder;
+use UserFrosting\Sprinkle\Commerce\Database\Seeds\ProductCatalogSeeder;
+use UserFrosting\Sprinkle\Commerce\Database\Seeds\ProductSeeder;
+use UserFrosting\Sprinkle\Commerce\Database\Seeds\PurchaseOrderLinesSeeder;
+use UserFrosting\Sprinkle\Commerce\Database\Seeds\PurchaseOrderSeeder;
+use UserFrosting\Sprinkle\Commerce\Database\Seeds\SalesOrderLinesSeeder;
+use UserFrosting\Sprinkle\Commerce\Database\Seeds\SalesOrderSeeder;
 
 /**
  * Commerce Sprinkle - eCommerce Solution for UserFrosting 6
@@ -53,7 +63,7 @@ use UserFrosting\Sprinkle\Commerce\Database\Migrations\v600\PurchaseOrderLinesTa
  * No custom models needed - CRUD6's generic model system handles everything.
  * Detail sections in schemas define one-to-many relationships.
  */
-class Commerce implements SprinkleRecipe, MigrationRecipe
+class Commerce implements SprinkleRecipe, MigrationRecipe, SeedRecipe
 {
     /**
      * {@inheritdoc}
@@ -126,5 +136,23 @@ class Commerce implements SprinkleRecipe, MigrationRecipe
     public function getListeners(): array
     {
         return [];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSeeds(): array
+    {
+        return [
+            CommerceSeeder::class,
+            CategorySeeder::class,
+            CatalogSeeder::class,
+            ProductSeeder::class,
+            ProductCatalogSeeder::class,
+            SalesOrderSeeder::class,
+            SalesOrderLinesSeeder::class,
+            PurchaseOrderSeeder::class,
+            PurchaseOrderLinesSeeder::class,
+        ];
     }
 }

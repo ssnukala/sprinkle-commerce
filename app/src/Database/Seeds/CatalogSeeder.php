@@ -12,14 +12,22 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Seeds;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Connection;
+use UserFrosting\Sprinkle\Core\Seeder\SeedInterface;
 
 /**
  * Seeder for product catalogs
  */
-class CatalogSeeder extends Seeder
+class CatalogSeeder implements SeedInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected Connection $db,
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
@@ -38,10 +46,11 @@ class CatalogSeeder extends Seeder
             ['user_id' => 1, 'parent_id' => 0, 'name' => 'Budget Friendly', 'description' => 'Affordable product options', 'slug' => 'budget-friendly', 'type' => 'BU', 'status' => 'A'],
         ];
 
+        $now = date('Y-m-d H:i:s');
         foreach ($catalogs as $catalog) {
-            DB::table('pr_catalog')->insert(array_merge($catalog, [
-                'created_at' => now(),
-                'updated_at' => now(),
+            $this->db->table('pr_catalog')->insert(array_merge($catalog, [
+                'created_at' => $now,
+                'updated_at' => $now,
             ]));
         }
     }

@@ -12,20 +12,28 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Commerce\Database\Seeds;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Connection;
+use UserFrosting\Sprinkle\Core\Seeder\SeedInterface;
 
 /**
  * Seeder for sales order line items
  */
-class SalesOrderLinesSeeder extends Seeder
+class SalesOrderLinesSeeder implements SeedInterface
 {
+    /**
+     * Constructor
+     */
+    public function __construct(
+        protected Connection $db,
+    ) {
+    }
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $now = now();
+        $now = date('Y-m-d H:i:s');
         
         $lines = [
             // Order 1 lines
@@ -53,7 +61,7 @@ class SalesOrderLinesSeeder extends Seeder
         ];
 
         foreach ($lines as $line) {
-            DB::table('or_sales_order_lines')->insert(array_merge($line, [
+            $this->db->table('or_sales_order_lines')->insert(array_merge($line, [
                 'created_at' => $now,
                 'updated_at' => $now,
             ]));
