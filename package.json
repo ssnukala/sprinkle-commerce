@@ -1,21 +1,19 @@
 {
   "name": "@ssnukala/sprinkle-commerce",
-  "version": "6.0.0-beta.1",
+  "version": "1.0.0",
+  "type": "module",
   "description": "eCommerce Sprinkle for UserFrosting 6 - Orders and Product Catalog",
+  "license": "MIT",
+  "author": "Srinivas Nukala (https://srinivasnukala.com/)",
   "keywords": [
-    "userfrosting",
-    "sprinkle",
-    "ecommerce",
-    "commerce",
+    "UserFrosting",
+    "eCommerce",
+    "Sprinkle",
+    "CRUD6",
     "orders",
     "products",
-    "catalog",
-    "sales",
-    "purchasing",
-    "cart"
+    "catalog"
   ],
-  "author": "Srinivas Nukala <srinivas@nukala.com>",
-  "license": "MIT",
   "homepage": "https://github.com/ssnukala/sprinkle-commerce#readme",
   "repository": {
     "type": "git",
@@ -24,35 +22,32 @@
   "bugs": {
     "url": "https://github.com/ssnukala/sprinkle-commerce/issues"
   },
-  "main": "app/assets/index.ts",
-  "types": "app/assets/index.ts",
   "exports": {
     ".": "./app/assets/index.ts",
-    "./composables": "./app/assets/composables/index.ts",
     "./components": "./app/assets/components/index.ts",
+    "./composables": "./app/assets/composables/index.ts",
     "./interfaces": "./app/assets/interfaces/index.ts",
     "./routes": "./app/assets/routes/index.ts",
     "./pages": "./app/assets/pages/index.ts"
   },
   "files": [
-    "app/assets/**/*",
-    "app/schema/**/*",
-    "README.md",
-    "LICENSE"
+    "app/assets",
+    "app/schema/"
   ],
+  "scripts": {
+    "build": "echo 'No build step needed - assets handled by UserFrosting'",
+    "test": "echo 'No frontend tests yet'"
+  },
   "peerDependencies": {
+    "@ssnukala/sprinkle-crud6": "github:ssnukala/sprinkle-crud6#main",
     "@userfrosting/sprinkle-account": "^6.0.0-beta",
     "@userfrosting/sprinkle-core": "^6.0.0-beta",
-    "@ssnukala/sprinkle-crud6": "dev-main",
-    "vue": "^3.3.0"
+    "vue": "^3.4.21"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0",
-    "vue": "^3.3.0"
-  },
-  "scripts": {
-    "build": "echo 'No build step needed - assets handled by UserFrosting'",
-    "test": "echo 'No frontend tests yet'"
+    "vue": "^3.5.22"
   }
 }
+
