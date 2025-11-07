@@ -7,8 +7,12 @@ $header = 'UserFrosting Commerce Sprinkle (http://www.userfrosting.com)
 @license   https://github.com/ssnukala/sprinkle-commerce/blob/main/LICENSE (MIT License)';
 
 $rules = [
+    '@PSR12' => true,
     'header_comment' => [
-        'header'       => $header
+        'header'       => $header,
+        'comment_type' => 'comment',
+        'location'     => 'after_open',
+        'separate'     => 'both',
     ]
 ];
 $finder = PhpCsFixer\Finder::create()
