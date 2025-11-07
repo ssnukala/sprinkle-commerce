@@ -24,8 +24,8 @@
   },
   "exports": {
     ".": "./app/assets/index.ts",
-    "./components": "./app/assets/components/index.ts",
     "./composables": "./app/assets/composables/index.ts",
+    "./components": "./app/assets/components/index.ts",
     "./interfaces": "./app/assets/interfaces/index.ts",
     "./routes": "./app/assets/routes/index.ts",
     "./pages": "./app/assets/pages/index.ts"
