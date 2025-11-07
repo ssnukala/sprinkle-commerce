@@ -28,6 +28,7 @@
 .vscode/
 /.idea/
 /.phpunit.cache/
+/.php_cs.cache
 /.vscode/
 /build/
 /coverage/
