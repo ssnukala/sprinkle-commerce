@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Commerce;
 
 use UserFrosting\Sprinkle\Account\Account;
-use UserFrosting\Sprinkle\Admin\Admin;
 use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\Core\Sprinkle\Recipe\MigrationRecipe;
 use UserFrosting\Sprinkle\Core\Sprinkle\Recipe\SeedRecipe;
@@ -89,7 +88,6 @@ class Commerce implements SprinkleRecipe, MigrationRecipe, SeedRecipe
         return [
             Core::class,
             Account::class,
-            Admin::class,
             CRUD6::class,
         ];
     }
@@ -98,14 +96,6 @@ class Commerce implements SprinkleRecipe, MigrationRecipe, SeedRecipe
      * {@inheritDoc}
      */
     public function getRoutes(): array
-    {
-        return [];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getServices(): array
     {
         return [];
     }
@@ -128,14 +118,6 @@ class Commerce implements SprinkleRecipe, MigrationRecipe, SeedRecipe
             PurchaseOrderTable::class,
             PurchaseOrderLinesTable::class,
         ];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getListeners(): array
-    {
-        return [];
     }
 
     /**

@@ -75,10 +75,9 @@ public function getSprinkles(): array
     return [
         Core::class,
         Account::class,
-        Admin::class,
-        CRUD6::class,
-        Commerce::class,  // Add this
-        // Payment::class,  // Add this if using payment processing
+        CRUD6::class,      // Required: CRUD6 must come before Commerce
+        Commerce::class,   // Add this
+        // Payment::class, // Add this if using payment processing
         // ... your other sprinkles
     ];
 }
